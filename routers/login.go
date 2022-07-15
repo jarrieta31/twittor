@@ -16,10 +16,9 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("content-type", "application/json")
 
 	var t models.Usuario
-
 	err := json.NewDecoder(r.Body).Decode(&t)
 	if err != nil {
-		http.Error(w, "Usuario y/o Contraseña inválidos "+err.Error(), 400)
+		http.Error(w, "Usuario y/o Contraseña inválidos! Error: "+err.Error(), 400)
 		return
 	}
 	//chequeamos que el email no venga vacío
@@ -30,7 +29,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	documento, existe := bd.IntentoLogin(t.Email, t.Password)
 	//chequeamos que el email no venga vacío
 	if existe == false {
-		http.Error(w, "Usuario y/o Contraseña inválidos", 400)
+		http.Error(w, "Usuario y/o Contraseña inválidos.", 400)
 		return
 	}
 	//Construimos un token

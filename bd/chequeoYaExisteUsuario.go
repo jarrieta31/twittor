@@ -21,7 +21,10 @@ func ChequeoYaExisteUsuario(email string) (models.Usuario, bool, string) {
 
 	var resultado models.Usuario
 
-	//Si hay un error lo guarda en err, y si no lo guarda en resultado
+	/*Al realizar la busqueda, si hay un error lo guarda en err, y si no, lo guarda en resultado.
+	FindOne recibe el contexto y la condición de busqueda y Decode convierte la salida
+	de la busqueda a josn y lo asigna a resultado.
+	*/
 	err := col.FindOne(ctx, condicion).Decode(&resultado)
 	ID := resultado.ID.Hex() //convierte el ObjID a string
 	if err != nil {

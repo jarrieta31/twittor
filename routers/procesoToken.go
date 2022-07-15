@@ -2,6 +2,7 @@ package routers
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 
 	jwt "github.com/dgrijalva/jwt-go"
@@ -23,14 +24,15 @@ func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
 	/* divie el texto del token y crea un array con dos elementos,
 	la posición 0 es la palabra Bearer, y la posicion 1 es el token
 	*/
-	splitToken := strings.Split(tk, "Bearer")
+	splitToken := strings.Split(tk, "Beare")
 	if len(splitToken) != 2 {
 		// Importante: los mensajes de error no pueden tener mayusculas ni signos de puntuación.
-		return claims, false, string(""), errors.New("formato de token invalida")
+		return claims, false, string(""), errors.New("formato de token invalido")
 	}
 
 	//aquí obtengo el token como string de la posición 1
 	tk = strings.TrimSpace(splitToken[1])
+	fmt.Println(tk)
 
 	/*
 		*En este paso se decoficia el token y se obtiene un objeto json con los datos contenidos

@@ -13,7 +13,8 @@ func GeneroJWT(t models.Usuario) (string, error) {
 	//Jwt trabaja con un array de bytes y no con string
 	miClave := []byte("MastersdelDesarrollo_grupodeFacebook")
 
-	//Esta es la carga útil del token
+	//Esta es la carga útil del token.
+	//Importante: el campo exp debe llamase exp tal como está
 	payload := jwt.MapClaims{
 		"email":            t.Email,
 		"nombre":           t.Nombre,
