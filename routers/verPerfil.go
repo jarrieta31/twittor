@@ -10,6 +10,7 @@ import (
 /*VerPerfil permite extraer los valores del Perfil*/
 func VerPerfil(w http.ResponseWriter, r *http.Request) {
 
+	//obtemos el ID que viene por la url de la petición Get
 	ID := r.URL.Query().Get("id")
 	//Chequea que el id no venga vacío
 	if len(ID) < 1 {
@@ -24,9 +25,11 @@ func VerPerfil(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//Si encontró el perfil, seteamos el header y enviamos el perfil encontrado
+	/*Si encontró el perfil, seteamos el header para avisar que lo que vamos a enviar es un json y
+	enviamos el perfil encontrado*/
 	w.Header().Set("context-type", "application/json")
 	w.WriteHeader(http.StatusCreated)
+	//codificamos el contenido del perfil a json
 	json.NewEncoder(w).Encode(perfil)
 
 }

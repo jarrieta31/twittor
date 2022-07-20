@@ -11,10 +11,11 @@ import (
 	"github.com/rs/cors"
 )
 
-/*Manejadores seteo mi puert, el Handler y pongo a escuchar el Servidor*/
+/*Manejadores seteo mi puerto, el Handler y pongo a escuchar el Servidor*/
 func Manejadores() {
 	router := mux.NewRouter()
 
+	/*registro y login comparten el mismo middelword*/
 	router.HandleFunc("/registro", middlew.ChequeoBD(routers.Registro)).Methods("POST")
 	router.HandleFunc("/login", middlew.ChequeoBD(routers.Login)).Methods("POST")
 	router.HandleFunc("/verperfil", middlew.ChequeoBD(middlew.ValidoJWT(routers.Login))).Methods("GET")

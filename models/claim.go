@@ -6,7 +6,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-/*Claim es la estructura usada para procesar el JWT*/
+/*Claim es la estructura usada para procesar el JWT.
+En este modelo de almacenan todos los datos que vienen en el token*/
 type Claim struct {
 	Email string             `json:"email"`
 	ID    primitive.ObjectID `bson:"_id" json:"_id,omitempty"`

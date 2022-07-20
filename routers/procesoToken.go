@@ -1,5 +1,7 @@
 package routers
 
+/* ProcesoToken es llamado por casi todos los EndPoints*/
+
 import (
 	"errors"
 	"fmt"
@@ -18,11 +20,15 @@ var IDUsuario string
 
 /*ProcesoToken proceso el token para extraer sus valores*/
 func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
+	//clave necesaria para desencriptar el token
 	miClave := []byte("MastersdelDesarrollo_grupodeFacebook")
+
+	/*La variable claims es un modelo para almacenar el contenido del token*/
 	claims := &models.Claim{} //claim tiene que ser un puntero
 
-	/* divie el texto del token y crea un array con dos elementos,
-	la posición 0 es la palabra Bearer, y la posicion 1 es el token
+	/* divide el texto del token y crea un array con dos elementos,
+	la posición 0 es la palabra Bearer, y la posicion 1 es el token, luego chequeamos
+	que el largo este correcto.
 	*/
 	splitToken := strings.Split(tk, "Beare")
 	if len(splitToken) != 2 {
@@ -30,14 +36,13 @@ func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
 		return claims, false, string(""), errors.New("formato de token invalido")
 	}
 
-	//aquí obtengo el token como string de la posición 1
+	/*Aquí obtengo el token como string de la posición 1, quito los espacios y sustituyo
+	el valor de la variable tk */
 	tk = strings.TrimSpace(splitToken[1])
 	fmt.Println(tk)
 
-	/*
-		*En este paso se decoficia el token y se obtiene un objeto json con los datos contenidos
-		en el, chequenado que el token es valido.
-	*/
+	/*En este paso se decoficia el token y se obtiene un objeto json con los datos contenidos
+	en el, chequenado que el token es valido. */
 	tkn, err := jwt.ParseWithClaims(tk, claims, func(token *jwt.Token) (interface{}, error) {
 		return miClave, nil
 	})
@@ -56,6 +61,6 @@ func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
 		return claims, false, string(""), errors.New("token invalido")
 	}
 
+	// Si hubo cualquier otro error
 	return claims, false, string(""), err
-
 }
