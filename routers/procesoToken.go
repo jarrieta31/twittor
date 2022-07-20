@@ -30,7 +30,7 @@ func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
 	la posición 0 es la palabra Bearer, y la posicion 1 es el token, luego chequeamos
 	que el largo este correcto.
 	*/
-	splitToken := strings.Split(tk, "Beare")
+	splitToken := strings.Split(tk, "Bearer")
 	if len(splitToken) != 2 {
 		// Importante: los mensajes de error no pueden tener mayusculas ni signos de puntuación.
 		return claims, false, string(""), errors.New("formato de token invalido")
