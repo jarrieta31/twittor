@@ -4,7 +4,6 @@ package routers
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 
 	jwt "github.com/dgrijalva/jwt-go"
@@ -39,7 +38,7 @@ func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
 	/*Aquí obtengo el token como string de la posición 1, quito los espacios y sustituyo
 	el valor de la variable tk */
 	tk = strings.TrimSpace(splitToken[1])
-	fmt.Println(tk)
+	//fmt.Println(tk)
 
 	/*En este paso se decoficia el token y se obtiene un objeto json con los datos contenidos
 	en el, chequenado que el token es valido. */
