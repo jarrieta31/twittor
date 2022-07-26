@@ -27,7 +27,7 @@ func VerPerfil(w http.ResponseWriter, r *http.Request) {
 
 	/*Si encontró el perfil, seteamos el header para avisar que lo que vamos a enviar es un json y
 	enviamos el perfil encontrado*/
-	w.Header().Set("context-type", "application/json")
+	w.Header().Set("Context-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	//codificamos el contenido del perfil a json
 	json.NewEncoder(w).Encode(perfil)

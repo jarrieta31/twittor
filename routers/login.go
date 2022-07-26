@@ -17,7 +17,7 @@ import (
 func Login(w http.ResponseWriter, r *http.Request) {
 	/* Seteamos el Header para decirle al navegador que el contenido que vamos a devolver es de
 	tipo json */
-	w.Header().Add("content-type", "application/json")
+	w.Header().Add("Content-Type", "application/json")
 	// declaramos una variable t de tipo usuario.
 	var t models.Usuario
 	/*Procesamos el Body del Request para ver lo que tiene adentro, si trae el email y la Password
